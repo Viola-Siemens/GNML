@@ -165,7 +165,7 @@ public final class HmclLocator {
 			return false;
 		}
 		String extension = name.substring(dot + 1);
-		return extension.equalsIgnoreCase("jar") || extension.equalsIgnoreCase("exe");
+		return extension.equalsIgnoreCase("jar") || extension.equalsIgnoreCase("exe") || extension.equalsIgnoreCase("sh");
 	}
 
 	private HmclLocator() {

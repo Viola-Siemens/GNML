@@ -10,7 +10,7 @@ Good Night Minecraft Launcher（简称 GNML）是一个基于 JavaAgent + ASM �
 
 ## 工作原理
 
-1. **主程序（Main）**：扫描当前工作目录与 GNML 所在目录下的 `*.jar` / `*.exe` 文件，通过读取 zip 内 `META-INF/MANIFEST.MF` 的 `Main-Class` 是否为 `org.jackhuang.hmcl.Main` 来识别 HMCL 启动器；随后以 `java -javaagent:<GNML.jar> -jar <HMCL文件>` 的方式拉起 HMCL，并等待其退出、透传退出码。
+1. **主程序（Main）**：扫描当前工作目录与 GNML 所在目录下的 `*.jar` / `*.exe` / `*.sh` 文件，通过读取 zip 内 `META-INF/MANIFEST.MF` 的 `Main-Class` 是否为 `org.jackhuang.hmcl.Main` 来识别 HMCL 启动器；随后以 `java -javaagent:<GNML.jar> -jar <HMCL文件>` 的方式拉起 HMCL，并等待其退出、透传退出码。
 2. **Agent（Premain）**：GNML 以 JavaAgent 形式挂载进 HMCL 的 JVM，使用 ASM 将 `org.jackhuang.hmcl.util.i18n.LocaleUtils#isChinaMainland()` 与 `org.jackhuang.hmcl.util.RegionUtils#checkMachineIsChinaMainland()`（HMCL 较新版本引入）的方法体整体替换为直接返回 `false`，使 HMCL 认为当前环境不在中国大陆。
 
 GNML 对 HMCL jar 文件本身不做任何写入，HMCL 的数字签名不受影响。
