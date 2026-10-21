@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'com.hexagram2021.gnml'
-version = '0.1.1'
+version = launcher_version
 
 java.disableAutoTargetJvm()
 
