@@ -16,6 +16,7 @@ import com.hexagram2021.gnml.launch.HmclLocator;
 import com.hexagram2021.gnml.launch.HmclProcessLauncher;
 import com.hexagram2021.gnml.launch.JavaRuntimeLocator;
 import com.hexagram2021.gnml.notify.UserNotifier;
+import com.hexagram2021.gnml.transform.AccountPolicyTransformer;
 import com.hexagram2021.gnml.transform.IsChinaMainlandTransformer;
 import com.hexagram2021.gnml.util.GnmlConstants;
 import com.hexagram2021.gnml.util.GnmlLog;
@@ -90,7 +91,9 @@ public final class GoodNightMinecraftLauncher {
 	public static void premain(String agentArgs, Instrumentation inst) {
 		// 不启用 retransform：premain 先于目标类加载，无需对已加载类做二次转换
 		inst.addTransformer(new IsChinaMainlandTransformer());
+		inst.addTransformer(new AccountPolicyTransformer());
 		GnmlLog.info("GNML agent 已挂载：HMCL 的中国大陆判定（LocaleUtils / RegionUtils）将被强制返回 false");
+		GnmlLog.info("GNML 账户策略已挂载：旧账户隐藏，新增账户标记，并要求先添加微软账户");
 	}
 
 	/**
